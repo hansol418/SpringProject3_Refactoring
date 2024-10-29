@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="www.thymeleaf.org"
+      layout:decorate="~{layout/base.html}"
+>
+<body>
+<div layout:fragment="content">
+  <h2>Login</h2>
+  <form id="loginForm">
+    <label>Username:</label>
+    <input type="text" name="username" id="username" />
+    <label>Password:</label>
+    <input type="password" name="password" id="password" />
+    <button type="submit">Login</button>
+  </form>
+</div>
+
+<script layout:fragment="javascript" th:inline="javascript">
+  document.getElementById('loginForm').addEventListener('submit', function(event) {
+    event.preventDefault();
+
+    const username = document.getElementById('username').value;
+    const password = document.getElementById('password').value;
+
+    const data = {
+      username: username,
+      password: password
+    };
+
+    console.log('Data:', data);
+
+    axios.post('/generateToken', data)
+            .then(function (res) {
+              console.log('Response:', res.data);
+              const accessToken = res.data.accessToken
+              const refreshToken = res.data.refreshToken
+
+              localStorage.setItem("accessToken", accessToken)
+              localStorage.setItem("refreshToken", refreshToken)
+              window.location.href = '/users';
+            })
+            .catch(function (error) {
+              console.error('Error:', error.response);
+              window.location.href = '/users/login';
+            });
+  });
+</script>
+</body>
+</html>

@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="ko"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org"
+      layout:decorate="~{layout/base.html}">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no" />
+
+    <title>TripWithMe 페이지</title>
+
+    <link th:href="@{/css/board_msy.css}" rel="stylesheet"/>
+    <link th:href="@{/css/common_msy.css}" rel="stylesheet">
+
+    <script th:src="@{/js/html5.js}"></script>
+    <script th:src="@{/js/jquery-3.1.1.min.js}"></script>
+    <script th:src="@{/js/slick.js}"></script>
+    <script th:src="@{/js/main.js}"></script>
+</head>
+
+<body>
+
+<div layout:fragment="content">
+    <div class="container">
+        <h1>게시판</h1>
+        <div class="header-bar">
+            <div class="create-button">
+                <a href="/boards/new"><button>글작성</button></a>
+            </div>
+
+
+            <form class="search-form" action="/boards" method="get">
+                <input type="text" name="searchKeyword" placeholder="검색어 입력" th:value="${searchKeyword}">
+                <button type="submit">검색</button>
+            </form>
+        </div>
+
+        <table>
+            <thead>
+            <tr>
+                <th>번호</th>
+                <th>제목</th>
+                <th>글쓴이</th>
+                <th>작성시간</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="boardDto, iterStat : ${boards}">
+                <td th:text="${startNumber - iterStat.index}"></td>
+                <td style="text-align: left;">
+                    <a th:href="@{/boards/{id}(id=${boardDto.id})}" th:text="${boardDto.title}"></a>
+                </td>
+                <td th:text="${boardDto.writer}"></td>
+                <td th:text="${#temporals.format(boardDto.createDate, 'yyyy-MM-dd HH:mm')}"></td>
+                <td>
+                    <a th:href="@{/boards/{id}(id=${boardDto.id})}">View</a>
+                    <a th:href="@{/boards/delete/{id}(id=${boardDto.id})}"
+                       onclick="return confirm('Are you sure you want to delete this board?');">Delete</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+
+        <div class="pagination">
+            <ul>
+
+                <li th:classappend="${nowPage == 0} ? 'disabled' : ''">
+                    <a th:href="@{/boards(page=${nowPage - 5}, searchKeyword=${searchKeyword})}"
+                       th:text="'Previous'" th:if="${nowPage > 4}">Previous</a>
+                </li>
+
+
+                <li th:each="page : ${#numbers.sequence(startPage, endPage)}"
+                    th:classappend="${page == nowPage} ? 'current-page' : ''">
+                    <a th:href="@{/boards(page=${page}, searchKeyword=${searchKeyword})}"
+                       th:text="${page + 1}"></a>
+                </li>
+
+
+                <li th:classappend="${nowPage >= totalPages - 1} ? 'disabled' : ''">
+                    <a th:href="@{/boards(page=${nowPage + 5}, searchKeyword=${searchKeyword})}"
+                       th:text="'Next'" th:if="${nowPage < totalPages - 1}">Next</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+</body>
+</html>

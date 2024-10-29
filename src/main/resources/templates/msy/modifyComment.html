@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="ko"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org"
+      layout:decorate="~{layout/base.html}">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no" />
+
+  <title>TripWithMe 페이지</title>
+
+  <link th:href="@{/css/board_msy.css}" rel="stylesheet"/>
+  <link th:href="@{/css/common_msy.css}" rel="stylesheet">
+
+  <script th:src="@{/js/html5.js}"></script>
+  <script th:src="@{/js/jquery-3.1.1.min.js}"></script>
+  <script th:src="@{/js/slick.js}"></script>
+  <script th:src="@{/js/main.js}"></script>
+</head>
+
+<body>
+
+<div layout:fragment="content">
+  <div style="display: flex;justify-content: center;">
+    <div style="width: 90%">
+      <h1>댓글 수정</h1>
+      <div class="form-container">
+        <style>
+          .cancel-button {
+            background-color: #f44336;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+          }
+
+          .cancel-button:hover {
+            background-color: #d32f2f;
+          }
+
+        </style>
+        <form th:action="@{/comment/update/{commentId}(commentId=${commentDto.id})}" method="post">
+          <input type="hidden" name="boardId" th:value="${commentDto.boardId}" />
+          <textarea name="content2" id="content2" th:text="${commentDto.content2}" placeholder="Edit your comment here..."></textarea>
+          <div class="form-buttons">
+            <input type="submit" value="저장" />
+            <a href="#" th:href="@{/boards/{boardId}(boardId=${commentDto.boardId})}"><button class="cancel-button">취소</button> </a>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
+

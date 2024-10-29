@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h2>http://localhost:8080/apiLogin.html 직접 접근</h2>
+<button class="btn1">generateToken</button>
+
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script>
+
+    document.querySelector(".btn1").addEventListener("click",()=> {
+
+        const data = {username:"test09022", password:"12" +
+                "34"}
+
+        axios.post("http://localhost:8080/generateToken", data).then(res => {
+            const accessToken = res.data.accessToken
+            const refreshToken = res.data.refreshToken
+
+            localStorage.setItem("accessToken", accessToken)
+            localStorage.setItem("refreshToken", refreshToken)
+
+        })
+
+    }, false)
+</script>
+
+</body>
+</html>
