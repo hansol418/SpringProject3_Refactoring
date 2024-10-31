@@ -72,7 +72,7 @@ public class SecurityConfig {
         http
                 .authorizeHttpRequests(authorizeRequests ->
                         authorizeRequests
-                                .requestMatchers("/main").permitAll() // /main 경로는 로그인 없이 접근 허용
+                                .requestMatchers("/main", "/images/**", "/css/**").permitAll() // /main, /images/**, /css/** 경로는 로그인 없이 접근 허용
                                 .requestMatchers("/api/users", "/users/new", "/refreshToken", "/users/token").permitAll()
                                 .requestMatchers("/users/**", "/reservations/**", "/payments/**").authenticated()
                 );

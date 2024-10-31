@@ -1,0 +1,41 @@
+/* 이미지 슬라이더 크기 조정 */
+#main-slide .carousel-inner img {
+    max-height: 500px;
+    object-fit: cover;
+}
+
+/* 퀵 메뉴 아이콘 크기 */
+.quick-icon {
+    width: 60px;
+    height: auto;
+    margin-bottom: 10px;
+}
+
+/* 검색 아이콘 크기 */
+.search-icon {
+    width: 24px;
+    height: 24px;
+}
+
+/* 리뷰 아이콘 크기 */
+.review-icon {
+    width: 40px;
+    height: 40px;
+}
+
+/* 푸터 로고 크기 조정 */
+.logo-img {
+    max-width: 150px;
+    height: auto;
+}
+
+/* 툴카드 텍스트 정렬 */
+.card-body {
+    text-align: center;
+}
+
+/* 푸터 텍스트 스타일 */
+footer p {
+    font-size: 0.9rem;
+    color: #aaa;
+}
