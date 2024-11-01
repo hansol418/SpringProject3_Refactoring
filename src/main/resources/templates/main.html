@@ -16,7 +16,7 @@
 
   <!-- Main Slide Section -->
   <section id="main-slide" class="container my-4">
-    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel" data-interval="3000">
       <div class="carousel-inner">
         <div class="carousel-item active">
           <img src="/images/toolmain.png" class="d-block w-100 img-fluid" alt="Tool Image 1">
@@ -74,19 +74,134 @@
   </section>
 
   <!-- Tool Display Section -->
-  <section id="tool-cards" class="container my-4">
-    <div class="row">
-      <div class="col-md-3 mb-4">
-        <div class="card h-100">
-          <img src="/images/drill.jpg" class="card-img-top" alt="드릴 이미지">
-          <div class="card-body">
-            <h5 class="card-title">전동드릴</h5>
-            <p class="card-text">회전력을 이용해 금속이나 목재를 가공할 때 사용</p>
+  <section id="tool-display" class="container my-4">
+    <div id="toolCarousel" class="carousel slide" data-ride="carousel" data-interval="3000">
+      <div class="carousel-inner">
+
+        <!-- Hammer Slide -->
+        <div class="carousel-item active">
+          <div class="d-flex flex-column align-items-center text-center">
+            <a href="#">
+              <img src="/images/hammer.jpg" class="d-block w-50 img-fluid" alt="망치 이미지">
+              <h3>망치</h3>
+              <p>못 등을 타격할 때 이용</p>
+            </a>
           </div>
         </div>
+
+        <!-- Screwdriver Slide -->
+        <div class="carousel-item">
+          <div class="d-flex flex-column align-items-center text-center">
+            <a href="#">
+              <img src="/images/screwdriver.jpg" class="d-block w-50 img-fluid" alt="드라이버 이미지">
+              <h3>드라이버</h3>
+              <p>나사를 돌려 끼우고 빼는 도구</p>
+            </a>
+          </div>
+        </div>
+
+        <!-- Saw Slide -->
+        <div class="carousel-item">
+          <div class="d-flex flex-column align-items-center text-center">
+            <a href="#">
+              <img src="/images/saw.jpg" class="d-block w-50 img-fluid" alt="톱 이미지">
+              <h3>톱</h3>
+              <p>목재 금속 석재 플라스틱 등을 절단하기 위한 공구</p>
+            </a>
+          </div>
+        </div>
+
+        <!-- Spanner Slide -->
+        <div class="carousel-item">
+          <div class="d-flex flex-column align-items-center text-center">
+            <a href="#">
+              <img src="/images/spanner.jpg" class="d-block w-50 img-fluid" alt="렌치 이미지">
+              <h3>렌치</h3>
+              <p>너트나 볼트 또는 관 등을 조이거나 틀어 돌리는데 쓰는 공구</p>
+            </a>
+          </div>
+        </div>
+
+        <!-- Grinder Slide -->
+        <div class="carousel-item">
+          <div class="d-flex flex-column align-items-center text-center">
+            <a href="#">
+              <img src="/images/grinder.jpg" class="d-block w-50 img-fluid" alt="그라인더 이미지">
+              <h3>그라인더</h3>
+              <p>회전하는 연삭 숫돌을 사용하여 공작물의 면을 깎는 기계</p>
+            </a>
+          </div>
+        </div>
+
+        <!-- Tape Measure Slide -->
+        <div class="carousel-item">
+          <div class="d-flex flex-column align-items-center text-center">
+            <a href="#">
+              <img src="/images/tape_measure.jpg" class="d-block w-50 img-fluid" alt="줄자 이미지">
+              <h3>줄자</h3>
+              <p>눈금을 새긴 긴 자</p>
+            </a>
+          </div>
+        </div>
+
+        <!-- Scissors Slide -->
+        <div class="carousel-item">
+          <div class="d-flex flex-column align-items-center text-center">
+            <a href="#">
+              <img src="/images/scissors.jpg" class="d-block w-50 img-fluid" alt="공업용 가위 이미지">
+              <h3>다목적 가위</h3>
+              <p>전선 등을 절단할 때 쓰는 공구</p>
+            </a>
+          </div>
+        </div>
+
+        <!-- Nipper Slide -->
+        <div class="carousel-item">
+          <div class="d-flex flex-column align-items-center text-center">
+            <a href="#">
+              <img src="/images/nipper.jpg" class="d-block w-50 img-fluid" alt="니퍼 이미지">
+              <h3>니퍼</h3>
+              <p>전선이나 철사, 선재를 절단할 때 사용</p>
+            </a>
+          </div>
+        </div>
+
+        <!-- Electric Drill Slide -->
+        <div class="carousel-item">
+          <div class="d-flex flex-column align-items-center text-center">
+            <a href="#">
+              <img src="/images/drill.jpg" class="d-block w-50 img-fluid" alt="전동드릴 이미지">
+              <h3>전동드릴</h3>
+              <p>회전력을 이용해 금속이나 목재를 가공하는 도구</p>
+            </a>
+          </div>
+        </div>
+
+        <!-- Vernier Calipers Slide -->
+        <div class="carousel-item">
+          <div class="d-flex flex-column align-items-center text-center">
+            <a href="#">
+              <img src="/images/vernier_calipers.jpg" class="d-block w-50 img-fluid" alt="버니어캘리퍼스 이미지">
+              <h3>버니어 캘리퍼스</h3>
+              <p>물체의 외경, 내경, 깊이를 측정하는 기구</p>
+            </a>
+          </div>
+        </div>
+
       </div>
+
+      <!-- Carousel Controls -->
+      <a class="carousel-control-prev" href="#toolCarousel" role="button" data-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+      </a>
+      <a class="carousel-control-next" href="#toolCarousel" role="button" data-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+      </a>
     </div>
   </section>
+
 
   <!-- Review Section -->
   <section id="review-warp" class="container my-4">
