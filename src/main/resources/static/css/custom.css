@@ -1,9 +1,38 @@
-/* 메인 슬라이드 이미지 크기 조정 */
+/* CSS for adjusting logo size in the header */
+
+/* 로고 이미지 크기 조정 */
+.logo-img {
+    max-width: 150px; /* 로고 최대 너비 조정 */
+    height: auto;
+    display: block;
+    margin: 0 auto;
+}
+
+/* Header and alignment adjustments */
+#header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+}
+
+.util-box a {
+    margin-left: 15px;
+    font-size: 1rem;
+    color: #000;
+    text-decoration: none;
+}
+
+.util-box a:hover {
+    color: #007bff;
+}
+
+/* Main Slide 이미지 크기 및 정렬 */
 #main-slide .carousel-inner img {
-    max-height: 500px;
-    object-fit: cover;
+    max-height: 400px; /* 높이 조정 */
+    object-fit: cover; /* 슬라이드 이미지 자르지 않고 유지 */
     border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* 이미지 그림자 효과 추가 */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 /* 퀵 메뉴 아이콘 크기 조정 및 간격 설정 */
@@ -54,57 +83,31 @@
     line-height: 1.5;
 }
 
-/* 푸터 텍스트 스타일 */
-footer p {
-    font-size: 0.9rem;
-    color: #aaa;
-    margin: 5px 0;
+/* 공구 카드 스타일 */
+#tool-display .card {
+    flex: 1;
+    margin: 0 10px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease-in-out;
 }
 
-/* 푸터 로고 크기 조정 */
-.logo-img {
-    max-width: 150px;
-    height: auto;
+#tool-display .card:hover {
+    transform: translateY(-5px); /* 호버 시 살짝 위로 이동 */
 }
 
-/* 공구 슬라이드 스타일 */
-#tool-display .carousel-item {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    text-align: center;
-    padding: 20px;
-}
-
-/* 공구 이미지 스타일 */
-#tool-display .carousel-item img {
-    width: 150px; /* 이미지 크기 조정 */
-    height: auto;
-    margin-bottom: 15px;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* 이미지 그림자 효과 */
-}
-
-/* 공구 텍스트 스타일 */
-#tool-display .carousel-item h3 {
-    font-size: 1.25rem;
-    font-weight: bold;
-    margin-bottom: 8px;
-    color: #333;
-}
-
-#tool-display .carousel-item p {
-    font-size: 1rem;
-    color: #666;
-    max-width: 200px;
+#tool-display .card-img-top {
+    max-height: 200px; /* 이미지 높이 조정 */
+    object-fit: contain; /* 이미지를 자르지 않고 전체를 표시 */
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
 }
 
 /* 슬라이드 컨트롤 스타일 */
 #toolCarousel .carousel-control-prev-icon,
 #toolCarousel .carousel-control-next-icon {
     filter: invert(100%);
-    background-color: rgba(0, 0, 0, 0.5); /* 반투명 배경 추가 */
+    background-color: rgba(0, 0, 0, 0.5);
     border-radius: 50%;
     padding: 10px;
 }
