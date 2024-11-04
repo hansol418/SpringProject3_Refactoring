@@ -1,65 +1,120 @@
-<!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<!doctype html>
+<html lang="ko">
 <head>
-    <title>My Page</title>
-    <link rel="stylesheet" href="path/to/your/css/styles.css">
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>공구분석 페이지</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
+
 <body>
-<h1>My Page</h1>
-<div>
-    <p>Username: <span id="username" th:text="${user.username}"></span></p>
-    <p>Email: <span id="email" th:text="${user.email}"></span>
-        <button onclick="editField('email')">Edit</button>
-    </p>
-    <p>Address: <span id="address" th:text="${user.address}"></span>
-        <button onclick="editField('address')">Edit</button>
-    </p>
-    <p>Phone: <span id="phone" th:text="${user.phone}"></span>
-        <button onclick="editField('phone')">Edit</button>
-    </p>
-</div>
-<a href="/users/mypage/changePassword" onclick="showChangePasswordForm()">Change Password</a>
-<a href="/users/mypage/deleteAccount" onclick="showDeleteAccountForm()">Delete Account</a>
+<div class="container mt-5">
+    <h1 class="text-center mb-4">My Page</h1>
+    <div class="card p-4">
+        <div class="mb-3">
+            <p class="fw-bold">Username:</p>
+            <span id="username">사용자 이름</span>
+        </div>
+        <div class="mb-3">
+            <p class="fw-bold">Email:</p>
+            <span id="email">user@example.com</span>
+            <button class="btn btn-outline-primary btn-sm ms-2" data-field="email">Edit</button>
+        </div>
+        <div class="mb-3">
+            <p class="fw-bold">Address:</p>
+            <span id="address">123 Main St</span>
+            <button class="btn btn-outline-primary btn-sm ms-2" data-field="address">Edit</button>
+        </div>
+        <div class="mb-3">
+            <p class="fw-bold">Phone:</p>
+            <span id="phone">010-1234-5678</span>
+            <button class="btn btn-outline-primary btn-sm ms-2" data-field="phone">Edit</button>
+        </div>
+        <div class="mt-4 d-flex justify-content-between">
+            <a href="/users/mypage/changePassword" class="btn btn-warning">Change Password</a>
+            <a href="/users/mypage/deleteAccount" class="btn btn-danger">Delete Account</a>
+        </div>
+    </div>
 
-<!-- Modal for feedback -->
-<div id="feedbackModal" style="display:none;">
-    <p>수정되었습니다.</p>
-    <button onclick="closeModal()">Close</button>
+    <!-- Modal for feedback -->
+    <div id="feedbackModal" class="modal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.5);">
+        <div class="modal-dialog" style="position:relative; top:50%; left:50%; transform:translate(-50%, -50%); background:white; padding:20px; border-radius:8px;">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">알림</h5>
+                    <button type="button" class="btn-close" onclick="closeModal()">Close</button>
+                </div>
+                <div class="modal-body">
+                    수정되었습니다.
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" onclick="closeModal()">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
+<!-- JavaScript 코드 -->
 <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        // 모든 Edit 버튼에 클릭 이벤트 추가
+        document.querySelectorAll('button[data-field]').forEach(button => {
+            button.addEventListener('click', function() {
+                const fieldId = button.getAttribute('data-field');
+                editField(fieldId);
+            });
+        });
+    });
+
     function editField(fieldId) {
-        var fieldElement = document.getElementById(fieldId);
-        var currentValue = fieldElement.innerText;
-        fieldElement.innerHTML = `<input type="text" id="${fieldId}-input" value="${currentValue}" />
-                                      <button onclick="saveField('${fieldId}')">Save</button>`;
+        const fieldElement = document.getElementById(fieldId);
+        const currentValue = fieldElement.innerText;
+        fieldElement.innerHTML = `<input type="text" id="${fieldId}-input" value="${currentValue}" class="form-control form-control-sm d-inline w-75" />
+                                  <button class="btn btn-success btn-sm ms-2" onclick="saveField('${fieldId}')">Save</button>`;
     }
 
     function saveField(fieldId) {
-        var newValue = document.getElementById(fieldId + '-input').value;
-        $.ajax({
-            url: '/api/users/mypage/edit',
-            type: 'POST',
-            data: JSON.stringify({ [fieldId]: newValue }),
-            contentType: 'application/json',
-            success: function(response) {
-                document.getElementById(fieldId).innerText = newValue;
-                showModal();
+        const inputElement = document.getElementById(`${fieldId}-input`);
+        const newValue = inputElement.value;
+
+        // CSRF 토큰 가져오기 (meta 태그에 설정된 경우)
+        const csrfToken = document.querySelector('meta[name="_csrf"]').getAttribute('content');
+        fetch('/api/users/mypage/edit', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRF-TOKEN': csrfToken // CSRF 토큰을 요청 헤더에 추가
             },
-            error: function() {
-                alert('오류가 발생했습니다. 다시 시도해 주세요.');
-            }
-        });
+            body: JSON.stringify({ [fieldId]: newValue }),
+            credentials: 'include'
+        })
+            .then(response => {
+                if (response.ok) {
+                    document.getElementById(fieldId).innerText = newValue;
+                    showModal();
+                } else {
+                    alert('오류가 발생했습니다. 다시 시도해 주세요.');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('서버에 연결할 수 없습니다.');
+            });
     }
 
     function showModal() {
-        document.getElementById('feedbackModal').style.display = 'block';
+        const modal = document.getElementById('feedbackModal');
+        modal.style.display = 'block';
     }
 
     function closeModal() {
-        document.getElementById('feedbackModal').style.display = 'none';
+        const modal = document.getElementById('feedbackModal');
+        modal.style.display = 'none';
     }
 </script>
+
 </body>
 </html>
