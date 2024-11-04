@@ -40,22 +40,22 @@ public class MyPageAPIController {
     }
 
     @DeleteMapping("/deleteAccount")
-    public ResponseEntity<String> deleteAccount(@AuthenticationPrincipal UserDetails userDetails) {
+    public ResponseEntity<String> deleteAccount(@AuthenticationPrincipal UserDetails userDetails,
+                                                @RequestParam("password") String password) {
         if (userDetails != null) {
             String username = userDetails.getUsername();
-            log.info("User {} is deleting account.", username);
+            log.info("User {} is attempting to delete their account.", username);
 
-            try {
-                myPageService.deleteUserByUsername(username);
-                log.info("User {} successfully deleted.", username);
+            boolean isDeleted = myPageService.verifyAndDeleteUser(username, password);
+            if (isDeleted) {
+                log.info("User {} successfully deleted their account.", username);
                 return ResponseEntity.ok("Account successfully deleted. Please login again.");
-            } catch (Exception e) {
-                log.error("Error occurred while deleting user {}: {}", username, e.getMessage());
-                return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                        .body("An error occurred while deleting the account. Please try again later.");
+            } else {
+                log.warn("Failed to delete account for user {}: Incorrect password.", username);
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Incorrect password. Account not deleted.");
             }
         } else {
-            log.warn("Unauthenticated user attempted to delete account.");
+            log.warn("Unauthenticated user attempted to delete an account.");
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Please login to delete your account.");
         }
     }

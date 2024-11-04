@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Confirm Delete Account</title>
+</head>
+<body>
+<h1>Confirm Delete Account</h1>
+<form th:action="@{/users/mypage/deleteAccount}" method="post">
+  <label for="password">Enter your password to confirm:</label>
+  <input type="password" id="password" name="password" required />
+  <button type="submit">Delete Account</button>
+</form>
+<a href="/users/mypage">Cancel</a>
+<div th:if="${error}">
+  <p th:text="${error}" class="error">비밀번호가 올바르지 않습니다</p>
+</div>
+</body>
+</html>

@@ -2,17 +2,64 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>My Page</title>
+    <link rel="stylesheet" href="path/to/your/css/styles.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
 <h1>My Page</h1>
 <div>
-    <p>Username: <span th:text="${user.username}"></span></p>
-    <p>Email: <span th:text="${user.email}"></span></p>
-    <p>Address: <span th:text="${user.address}"></span></p>
-    <p>Phone: <span th:text="${user.phone}"></span></p>
-    <p>Name: <span th:text="${user.name}"></span></p>
+    <p>Username: <span id="username" th:text="${user.username}"></span></p>
+    <p>Email: <span id="email" th:text="${user.email}"></span>
+        <button onclick="editField('email')">Edit</button>
+    </p>
+    <p>Address: <span id="address" th:text="${user.address}"></span>
+        <button onclick="editField('address')">Edit</button>
+    </p>
+    <p>Phone: <span id="phone" th:text="${user.phone}"></span>
+        <button onclick="editField('phone')">Edit</button>
+    </p>
 </div>
-<a href="/users/mypage/edit">Edit Profile</a>
-<a href="/users/mypage/confirmDelete">Delete Account</a>
+<a href="/users/mypage/changePassword" onclick="showChangePasswordForm()">Change Password</a>
+<a href="/users/mypage/deleteAccount" onclick="showDeleteAccountForm()">Delete Account</a>
+
+<!-- Modal for feedback -->
+<div id="feedbackModal" style="display:none;">
+    <p>수정되었습니다.</p>
+    <button onclick="closeModal()">Close</button>
+</div>
+
+<script>
+    function editField(fieldId) {
+        var fieldElement = document.getElementById(fieldId);
+        var currentValue = fieldElement.innerText;
+        fieldElement.innerHTML = `<input type="text" id="${fieldId}-input" value="${currentValue}" />
+                                      <button onclick="saveField('${fieldId}')">Save</button>`;
+    }
+
+    function saveField(fieldId) {
+        var newValue = document.getElementById(fieldId + '-input').value;
+        $.ajax({
+            url: '/api/users/mypage/edit',
+            type: 'POST',
+            data: JSON.stringify({ [fieldId]: newValue }),
+            contentType: 'application/json',
+            success: function(response) {
+                document.getElementById(fieldId).innerText = newValue;
+                showModal();
+            },
+            error: function() {
+                alert('오류가 발생했습니다. 다시 시도해 주세요.');
+            }
+        });
+    }
+
+    function showModal() {
+        document.getElementById('feedbackModal').style.display = 'block';
+    }
+
+    function closeModal() {
+        document.getElementById('feedbackModal').style.display = 'none';
+    }
+</script>
 </body>
 </html>
