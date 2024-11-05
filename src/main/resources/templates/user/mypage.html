@@ -1,48 +1,57 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ko"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       xmlns:th="http://www.thymeleaf.org"
-      layout:decorate="~{layout/base.html}">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <title>공구분석 페이지</title>
+      layout:decorate="~{layout/base.html}"> <!-- layout/base.html을 사용하여 헤더와 푸터 고정 -->
 
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>My Page</title>
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 
-<body>
-<div layout:fragment="content">
+<body layout:fragment="content"> <!-- content로 MyPage 내용 삽입 -->
 <div class="container mt-5">
     <h1 class="text-center mb-4">My Page</h1>
     <div class="card p-4">
+        <!-- 사용자 이름 표시 (Thymeleaf 사용) -->
         <div class="mb-3">
             <p class="fw-bold">Username:</p>
-            <span id="username">사용자 이름</span>
+            <span id="username" th:text="${user.username}">사용자 이름</span>
         </div>
+
+        <!-- 이메일 표시 및 수정 버튼 -->
         <div class="mb-3">
             <p class="fw-bold">Email:</p>
-            <span id="email">user@example.com</span>
+            <span id="email" th:text="${user.email}">user@example.com</span>
             <button class="btn btn-outline-primary btn-sm ms-2" data-field="email">Edit</button>
         </div>
+
+        <!-- 주소 표시 및 수정 버튼 -->
         <div class="mb-3">
             <p class="fw-bold">Address:</p>
-            <span id="address">123 Main St</span>
+            <span id="address" th:text="${user.address}">123 Main St</span>
             <button class="btn btn-outline-primary btn-sm ms-2" data-field="address">Edit</button>
         </div>
+
+        <!-- 전화번호 표시 및 수정 버튼 -->
         <div class="mb-3">
             <p class="fw-bold">Phone:</p>
-            <span id="phone">010-1234-5678</span>
+            <span id="phone" th:text="${user.phone}">010-1234-5678</span>
             <button class="btn btn-outline-primary btn-sm ms-2" data-field="phone">Edit</button>
         </div>
+
+        <!-- 비밀번호 변경 및 계정 삭제 링크 -->
         <div class="mt-4 d-flex justify-content-between">
             <a href="/users/mypage/changePassword" class="btn btn-warning">Change Password</a>
             <a href="/users/mypage/deleteAccount" class="btn btn-danger">Delete Account</a>
         </div>
     </div>
 
-    <!-- Modal for feedback -->
+    <!-- 수정 완료 알림 모달 -->
     <div id="feedbackModal" class="modal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.5);">
         <div class="modal-dialog" style="position:relative; top:50%; left:50%; transform:translate(-50%, -50%); background:white; padding:20px; border-radius:8px;">
             <div class="modal-content">
@@ -61,10 +70,10 @@
     </div>
 </div>
 
-<!-- JavaScript 코드 -->
+<!-- JavaScript 함수 -->
 <script>
+    // 페이지 로드 시 모든 Edit 버튼에 클릭 이벤트 추가
     document.addEventListener("DOMContentLoaded", function() {
-        // 모든 Edit 버튼에 클릭 이벤트 추가
         document.querySelectorAll('button[data-field]').forEach(button => {
             button.addEventListener('click', function() {
                 const fieldId = button.getAttribute('data-field');
@@ -73,6 +82,7 @@
         });
     });
 
+    // 특정 필드를 수정할 수 있도록 입력 필드로 변경하는 함수
     function editField(fieldId) {
         const fieldElement = document.getElementById(fieldId);
         const currentValue = fieldElement.innerText;
@@ -80,6 +90,7 @@
                                   <button class="btn btn-success btn-sm ms-2" onclick="saveField('${fieldId}')">Save</button>`;
     }
 
+    // 수정된 값을 서버에 저장하고 화면에 반영하는 함수
     function saveField(fieldId) {
         const inputElement = document.getElementById(`${fieldId}-input`);
         const newValue = inputElement.value;
@@ -109,16 +120,17 @@
             });
     }
 
+    // 모달을 화면에 표시하는 함수
     function showModal() {
         const modal = document.getElementById('feedbackModal');
         modal.style.display = 'block';
     }
 
+    // 모달을 닫는 함수
     function closeModal() {
         const modal = document.getElementById('feedbackModal');
         modal.style.display = 'none';
     }
 </script>
-</div>
 </body>
 </html>
