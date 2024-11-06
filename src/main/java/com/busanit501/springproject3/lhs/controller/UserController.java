@@ -2,6 +2,7 @@ package com.busanit501.springproject3.lhs.controller;
 
 import com.busanit501.springproject3.lhs.entity.User;
 import com.busanit501.springproject3.lhs.entity.mongoEntity.ProfileImage;
+import com.busanit501.springproject3.lhs.repository.UserRepository;
 import com.busanit501.springproject3.lhs.service.UserService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -12,6 +13,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
@@ -23,7 +25,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.io.IOException;
 import java.util.Optional;
@@ -40,6 +41,8 @@ public class UserController {
 
     @Autowired
     PasswordEncoder bCryptPasswordEncoder;
+    @Autowired
+    private UserRepository userRepository;
 
     @GetMapping
     public String getAllUsers(@AuthenticationPrincipal UserDetails user, Model model,
@@ -164,5 +167,15 @@ public class UserController {
         return "redirect:https://kauth.kakao.com/oauth/logout?client_id=" + restAPIKEY
                 + "&logout_redirect_uri=http://localhost:8080/users/login";
     }
+
+    @GetMapping("/me")
+    public ResponseEntity<User> getCurrentUser(@AuthenticationPrincipal UserDetails userDetails) {
+        Optional<User> currentUser = userService.getCurrentUser(userDetails);
+        if (currentUser.isPresent()) {
+            return ResponseEntity.ok(currentUser.get());
+        }
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build(); // 로그인 상태가 아닐 때 401 반환
+    }
+
 
 }

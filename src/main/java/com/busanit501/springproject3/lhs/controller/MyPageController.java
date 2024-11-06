@@ -48,7 +48,13 @@ public class MyPageController {
     public ResponseEntity<String> editUserField(@AuthenticationPrincipal UserDetails userDetails, @RequestBody Map<String, String> updates) {
         if (userDetails != null) {
             String username = userDetails.getUsername();
-            boolean isUpdated = myPageService.updateUserField(username, updates);
+            boolean isUpdated = false;
+
+            // email, address, phone 필드 변경 가능하도록 처리
+            if (updates.containsKey("email") || updates.containsKey("address") || updates.containsKey("phone")) {
+                isUpdated = myPageService.updateUserField(username, updates);
+            }
+
             if (isUpdated) {
                 return ResponseEntity.ok("수정되었습니다.");
             } else {
@@ -88,7 +94,6 @@ public class MyPageController {
             return "redirect:/users/login";
         }
     }
-
 
     @GetMapping("/deleteAccount")
     public String showDeleteAccountPage() {
