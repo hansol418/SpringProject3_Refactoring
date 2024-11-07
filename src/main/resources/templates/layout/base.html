@@ -1,42 +1,41 @@
 <!doctype html>
-<html lang="ko">
+<html lang="ko" xmlns:layout="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=Edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"/>
-
     <title>공구분석 페이지</title>
-
-    <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <!-- Custom CSS -->
     <link rel="stylesheet" href="/css/custom.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 </head>
 
 <body>
 <div id="wrap" class="container-fluid">
-
-    <!-- Header -->
     <header id="header" class="bg-light py-3">
         <div class="container d-flex justify-content-between align-items-center">
             <div class="logo-box">
                 <a href="/main"><img src="/images/toollogo.png" alt="메인페이지 바로가기" class="logo-img"></a>
             </div>
             <div class="util-box">
-                <a href="/users/join" class="btn btn-link">회원가입</a>
-                <a href="/users/login" class="btn btn-link">로그인</a>
-                <a href="/users/logout" class="btn btn-link">로그아웃</a>
-                <a href="/users/mypage" class="btn btn-link">마이페이지</a>
+                <!-- 로그인 상태에 따라 동적으로 버튼을 표시 -->
+                <div id="auth-buttons">
+                    <a href="/users/join" class="btn btn-link">회원가입</a>
+                    <a href="/users/login" class="btn btn-link">로그인</a>
+                </div>
+                <div id="user-info" style="display: none;">
+                    <span id="welcome-message"></span>
+                    <a href="/users/logout" class="btn btn-link">로그아웃</a>
+                    <a href="/users/mypage" class="btn btn-link">마이페이지</a>
+                </div>
             </div>
         </div>
     </header>
 
-    <!-- Main Content Placeholder -->
     <div layout:fragment="content">
         <!-- 메인 페이지의 콘텐츠가 여기에 삽입됩니다 -->
     </div>
 
-    <!-- Footer -->
     <footer class="bg-dark text-white text-center py-4">
         <div class="container">
             <p>부산 부산진구 중앙대로 708 부산파이낸스센터 4층</p>
@@ -46,9 +45,7 @@
         </div>
     </footer>
 </div>
-
-<!-- Bootstrap JS, jQuery, and Popper.js -->
-<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="/js/base_lcs.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>

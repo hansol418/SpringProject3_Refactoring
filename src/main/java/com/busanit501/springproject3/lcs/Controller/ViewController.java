@@ -8,7 +8,7 @@ public class ViewController {
 
     @GetMapping("/classify")
     public String index() {
-        return "index";
+        return "classify";
     }
 }
 

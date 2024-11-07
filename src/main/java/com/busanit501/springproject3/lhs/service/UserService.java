@@ -9,6 +9,7 @@ import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -100,4 +101,13 @@ public class UserService {
             userRepository.save(user);
         }
     }
+
+    public Optional<User> getCurrentUser(UserDetails userDetails) {
+        if (userDetails != null) {
+            return userRepository.findByUsername(userDetails.getUsername());
+        }
+        return Optional.empty();
+    }
+
+
 }

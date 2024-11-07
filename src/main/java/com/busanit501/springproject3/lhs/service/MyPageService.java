@@ -5,6 +5,7 @@ import com.busanit501.springproject3.lhs.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
 import java.util.Map;
 import java.util.Optional;
 
@@ -22,7 +23,7 @@ public class MyPageService {
         return userRepository.findByUsername(username);
     }
 
-    // 유저 정보 업데이트
+    // 유저 정보 업데이트 (전체 정보 업데이트)
     public User updateUserInfo(String username, User updatedUserInfo) {
         Optional<User> existingUser = userRepository.findByUsername(username);
         if (existingUser.isPresent()) {
@@ -37,11 +38,13 @@ public class MyPageService {
         }
     }
 
-    // 특정 필드 업데이트
+    // 특정 필드 업데이트 (email, address, phone 필드를 업데이트)
     public boolean updateUserField(String username, Map<String, String> updates) {
         Optional<User> existingUser = userRepository.findByUsername(username);
         if (existingUser.isPresent()) {
             User user = existingUser.get();
+
+            // 주어진 필드와 값을 기반으로 업데이트 수행
             updates.forEach((field, value) -> {
                 switch (field) {
                     case "email":
@@ -53,8 +56,12 @@ public class MyPageService {
                     case "phone":
                         user.setPhone(value);
                         break;
+                    default:
+                        throw new IllegalArgumentException("Invalid field: " + field);
                 }
             });
+
+            // 업데이트된 정보를 저장
             userRepository.save(user);
             return true;
         }
