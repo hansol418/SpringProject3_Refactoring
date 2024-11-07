@@ -41,8 +41,7 @@ public class UserController {
 
     @Autowired
     PasswordEncoder bCryptPasswordEncoder;
-    @Autowired
-    private UserRepository userRepository;
+
 
     @GetMapping
     public String getAllUsers(@AuthenticationPrincipal UserDetails user, Model model,
