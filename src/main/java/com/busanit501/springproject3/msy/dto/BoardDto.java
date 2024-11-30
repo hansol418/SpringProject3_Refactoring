@@ -2,6 +2,7 @@ package com.busanit501.springproject3.msy.dto;
 
 import com.busanit501.springproject3.msy.entity.Board;
 import com.busanit501.springproject3.msy.entity.Comment;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 
 import java.time.LocalDateTime;
@@ -9,17 +10,21 @@ import java.util.List;
 
 @Data
 public class BoardDto {
-
     private Long id;
     private String title;
     private String writer;
     private String boardContent;
     private String filename;
     private String filepath;
-    private LocalDateTime createDate;
-    private LocalDateTime modifyDate;
-    private List<Comment> answerList;
 
+    // LocalDateTime 필드에 JSON 직렬화 형식 적용
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
+    private LocalDateTime createDate;
+
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
+    private LocalDateTime modifyDate;
+
+    private List<Comment> answerList;
 
     public Board toEntity() {
         Board board = new Board();

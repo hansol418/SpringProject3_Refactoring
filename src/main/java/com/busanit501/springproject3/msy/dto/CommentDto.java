@@ -2,20 +2,25 @@ package com.busanit501.springproject3.msy.dto;
 
 import com.busanit501.springproject3.msy.entity.Board;
 import com.busanit501.springproject3.msy.entity.Comment;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.*;
 
 import java.time.LocalDateTime;
 
 @Data
-@Getter
-@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 public class CommentDto {
     private Long id;
     private Long boardId;
     private String content2;
+    private String writer;
+
+    // LocalDateTime 필드에 JSON 직렬화 형식 적용
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime createDate;
+
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime modifyDate;
 
     public Comment toEntity(Board board) {
