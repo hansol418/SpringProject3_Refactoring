@@ -50,6 +50,13 @@ public class BoardRestController {
         return ResponseEntity.ok("Board created successfully");
     }
 
+    @PutMapping("/{id}")
+    public ResponseEntity<String> updateBoard(@PathVariable("id") Long id, @RequestBody BoardDto boardDto) {
+        boardDto.setId(id); // ID 설정
+        boardService.saveOrUpdateItem(boardDto);
+        return ResponseEntity.ok("Board updated successfully");
+    }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteBoard(@PathVariable("id") Long id) {
         boardService.deleteBoard(id);
