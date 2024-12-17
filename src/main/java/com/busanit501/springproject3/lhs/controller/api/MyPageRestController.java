@@ -73,12 +73,19 @@ public class MyPageRestController {
         }
     }
 
-    @DeleteMapping("/deleteAccount")
+    @PostMapping("/deleteAccount")
     public ResponseEntity<String> deleteAccount(@AuthenticationPrincipal UserDetails userDetails,
-                                                @RequestParam("password") String password) {
+                                                @RequestBody Map<String, String> passwordDetails) {
         if (userDetails != null) {
             String username = userDetails.getUsername();
+            String password = passwordDetails.get("password"); // Body에서 비밀번호 추출
+
+            if (password == null || password.trim().isEmpty()) {
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Password is required.");
+            }
+
             boolean isDeleted = myPageService.verifyAndDeleteUser(username, password);
+
             if (isDeleted) {
                 return ResponseEntity.ok("Account deleted successfully.");
             } else {
