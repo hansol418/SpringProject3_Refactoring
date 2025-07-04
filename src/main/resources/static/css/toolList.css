@@ -1,3 +1,18 @@
+/* header 안의 container에만 별도 padding 적용 */
+#header .container {
+  padding-left: 15px;
+  padding-right: 15px;
+  max-width: 1140px;  /* Bootstrap 기본 너비 */
+  margin: 0 auto;
+}
+
+.container, .container-fluid {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+  margin: 0 auto;
+  max-width: 100%;
+}
+
 .card-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -21,11 +36,19 @@
   object-fit: cover;
 }
 
+/*.card-content {*/
+/*  padding: 15px;*/
+/*  display: grid;*/
+/*  grid-template-columns: 1fr;*/
+/*  grid-template-rows: repeat(4, auto);*/
+/*}*/
+
 .card-content {
   padding: 15px;
-  display: grid;
-  grid-template-columns: 1fr;
-  grid-template-rows: repeat(4, auto);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 190.8px; /* 적절한 고정값 */
 }
 
 .card-content h2 {

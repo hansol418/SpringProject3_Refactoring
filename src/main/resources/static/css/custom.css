@@ -11,9 +11,10 @@
 /* Header and alignment adjustments */
 #header {
     display: flex;
-    justify-content: space-between;
+    justify-content: center; /* 중앙 정렬 */
     align-items: center;
     padding: 10px 0;
+    gap: 40px; /* 요소 사이 여백 */
 }
 
 .util-box a {
@@ -182,3 +183,7 @@ footer a {
 footer a:hover {
     color: #fff;
 }
+
+
+
+

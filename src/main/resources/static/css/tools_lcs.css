@@ -1,5 +1,28 @@
 /* 전체 컨테이너 설정 */
-/* 전체 컨테이너 설정 */
+
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    box-sizing: border-box;
+    background-color: #ffffff;
+}
+
+.container, .container-fluid {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    margin: 0 auto;
+    max-width: 100%;
+}
+
+/* header 안의 container에만 별도 padding 적용 */
+#header .container {
+    padding-left: 15px;
+    padding-right: 15px;
+    max-width: 1140px;  /* Bootstrap 기본 너비 */
+    margin: 0 auto;
+}
+
 .main-container {
     display: flex;
     flex-direction: column;
@@ -9,48 +32,110 @@
     padding: 20px;
 }
 
-/* 이미지 및 설명을 담는 섹션 */
-.content-section {
-    display: flex;
-    flex-direction: row;
-    width: 100%;
-    margin-bottom: 30px;
+:root {
+    --main-bg: #ffffff;
+    --box-bg: #ffffff;
+    --border: #e0e0e0;
+    --radius: 10px;
+    --shadow: 0px 2px 8px rgba(0, 0, 0, 0.05);
 }
 
-/* 이미지 업로드 섹션 */
-.image-upload {
+/* 이미지 및 설명을 담는 섹션 */
+/*.content-section {*/
+/*    display: flex;*/
+/*    flex-direction: row;*/
+/*    width: 100%;*/
+/*    margin-bottom: 30px;*/
+/*}*/
+
+.content-section,
+.image-upload,
+.result-display,
+.video-container {
+    background-color: var(--box-bg);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    box-sizing: border-box;
+}
+
+.content-section {
     display: flex;
-    flex-direction: column;
-    align-items: center;
+    gap: 24px;
+    padding: 32px;
+    width: 100%;
+    align-items: stretch;
+}
+
+
+
+/* 이미지 업로드 섹션 */
+/*.image-upload {*/
+/*    display: flex;*/
+/*    flex-direction: column;*/
+/*    align-items: center;*/
+/*    width: 50%;*/
+/*    padding: 20px;*/
+/*    text-align: center;*/
+/*}*/
+
+.image-upload,
+.result-display {
     width: 50%;
     padding: 20px;
-    text-align: center;
+    border: 1px solid var(--border);
 }
+
+/*.image-upload img {*/
+/*    width: 100%;*/
+/*    max-width: 500px;*/
+/*    height: 500px;*/
+/*    border-radius: 8px;*/
+/*    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);*/
+/*    margin-bottom: 10px;*/
+/*}*/
 
 .image-upload img {
     width: 100%;
-    max-width: 500px;
-    height: 500px;
-    border-radius: 8px;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
-    margin-bottom: 10px;
+    height: 400px;               /* 고정 높이 */
+    object-fit: contain;         /* 이미지 비율 유지하며 채우기 */
+    background-color: #fafafa;   /* 이미지 없을 때 보일 배경 */
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    margin-bottom: 15px;
+    display: block;              /* img는 inline 요소라 block으로 */
 }
+
+
+
 
 .image-upload input[type="file"] {
     margin-top: 10px;
-    padding: 8px;
     font-size: 1rem;
 }
 
 /* 설명 표시 섹션 */
-.result-display {
-    width: 50%;
-    padding: 20px;
-    background-color: #f5f5f5;
-    border-radius: 8px;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-    text-align: center;
-}
+/*.result-display {*/
+/*    width: 50%;*/
+/*    padding: 20px;*/
+/*    background-color: #f5f5f5;*/
+/*    border-radius: 8px;*/
+/*    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);*/
+/*    text-align: center;*/
+/*}*/
+
+/*.result-display {*/
+/*    width: 50%;*/
+/*    padding: 20px;*/
+/*    background-color: var(--main-bg);*/
+/*    border-radius: var(--box-radius);*/
+/*    box-shadow: var(--box-shadow);*/
+/*    text-align: center;*/
+/*    display: flex;*/
+/*    flex-direction: column;*/
+/*    justify-content: center;*/
+/*    box-sizing: border-box;*/
+/*}*/
 
 .result-display h2 {
     font-size: 1.5rem;
@@ -69,9 +154,10 @@
 
 /* 유튜브 비디오 섹션 */
 .video-container {
-    width: 100%;
+    margin-top: 40px;
     text-align: center;
-    margin-top: 30px;
+    padding: 24px;
+    border: 1px solid var(--border);
 }
 
 .video-container h2 {
@@ -79,10 +165,21 @@
     margin-bottom: 15px;
 }
 
+
 #videoFrame {
     width: 100%;
-    max-width: 800px;
-    height: 400px;
-    border-radius: 8px;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    max-width: 1200px; /* 💡 1000~1200px까지 늘리면 시원함 */
+    height: 500px;     /* 비율 맞게 높이도 살짝 증가 */
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    display: block;
+    margin: 0 auto;    /* 중앙 정렬 */
+}
+
+
+.full-width {
+    width: 100%;
+    max-width: 100%;
+    padding: 0;
+    margin: 0;
 }

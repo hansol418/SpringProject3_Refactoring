@@ -1,11 +1,16 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="ko"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org"
+      layout:decorate="~{layout/base.html}">
 <head>
     <meta charset="UTF-8">
     <title>공구 목록</title>
-    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/toolList.css">
 </head>
+
 <body>
+<div layout:fragment="content">
 <div class="container">
     <h1>공구 목록</h1>
     <div class="card-grid">
@@ -19,6 +24,7 @@
             </div>
         </div>
     </div>
+</div>
 </div>
 </body>
 </html>
