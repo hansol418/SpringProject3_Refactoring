@@ -8,6 +8,13 @@
     margin: 0 auto;
 }
 
+.container, .container-fluid {
+    padding-left: 15px !important;
+    padding-right: 15px !important;
+    margin: 0 auto;
+    max-width: 100%;
+}
+
 /* Header and alignment adjustments */
 #header {
     display: flex;

@@ -19,8 +19,8 @@
         <p>No profile image uploaded.</p>
       </span>
       <span th:text="${user.username}"></span> -
-      <a th:href="@{/users/{id}/edit(id=${user.id})}">Edit</a> |
-      <a th:href="@{/users/{id}/delete(id=${user.id})}">Delete</a>
+      <a th:href="@{/users/{id}/edit(id=${user.id})}">수정</a> |
+      <a th:href="@{/users/{id}/delete(id=${user.id})}">삭제</a>
 
     </li>
   </ul>

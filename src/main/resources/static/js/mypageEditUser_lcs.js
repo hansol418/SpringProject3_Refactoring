@@ -11,7 +11,7 @@ function editField(field) {
     if (editButton) editButton.style.display = 'none';
 
     // save 버튼 추가
-    const saveButton = `<button class="btn btn-success btn-sm ms-2" onclick="saveField('${field}')">Save</button>`;
+    const saveButton = `<button class="btn btn-success btn-sm ms-2" onclick="saveField('${field}')">저장</button>`;
     document.getElementById(field).insertAdjacentHTML('afterend', saveButton);
 }
 

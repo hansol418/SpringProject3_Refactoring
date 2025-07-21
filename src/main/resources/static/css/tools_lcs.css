@@ -8,20 +8,15 @@ html, body {
     background-color: #ffffff;
 }
 
-.container, .container-fluid {
-    padding-left: 0 !important;
-    padding-right: 0 !important;
-    margin: 0 auto;
-    max-width: 100%;
-}
-
 /* header 안의 container에만 별도 padding 적용 */
-#header .container {
-    padding-left: 15px;
-    padding-right: 15px;
-    max-width: 1140px;  /* Bootstrap 기본 너비 */
-    margin: 0 auto;
-}
+/*#header .container {*/
+/*    padding-left: 15px;*/
+/*    padding-right: 15px;*/
+/*    max-width: 1140px;  !* Bootstrap 기본 너비 *!*/
+/*    margin: 0 auto;*/
+/*}*/
+
+
 
 .main-container {
     display: flex;

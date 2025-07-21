@@ -1,17 +1,10 @@
 /* header 안의 container에만 별도 padding 적용 */
-#header .container {
-  padding-left: 15px;
-  padding-right: 15px;
-  max-width: 1140px;  /* Bootstrap 기본 너비 */
-  margin: 0 auto;
-}
-
-.container, .container-fluid {
-  padding-left: 0 !important;
-  padding-right: 0 !important;
-  margin: 0 auto;
-  max-width: 100%;
-}
+/*#header .container {*/
+/*  padding-left: 15px;*/
+/*  padding-right: 15px;*/
+/*  max-width: 1140px;  !* Bootstrap 기본 너비 *!*/
+/*  margin: 0 auto;*/
+/*}*/
 
 .card-grid {
   display: grid;
@@ -35,13 +28,6 @@
   aspect-ratio: 1/1;
   object-fit: cover;
 }
-
-/*.card-content {*/
-/*  padding: 15px;*/
-/*  display: grid;*/
-/*  grid-template-columns: 1fr;*/
-/*  grid-template-rows: repeat(4, auto);*/
-/*}*/
 
 .card-content {
   padding: 15px;
@@ -77,13 +63,6 @@
   background-color: #45a049;
 }
 
-
-.container {
-  width: 90%;
-  margin: 0 auto;
-  padding: 20px;
-}
-
 .detail-card {
   display: flex;
   align-items: flex-start;
@@ -96,12 +75,13 @@
 }
 
 .detail-card img {
-  width: 40%;
-  height: auto;
+  height: 630px;
+  width: auto;
+  object-fit: contain; /* 비율 유지하며 안 잘리도록 */
   border-radius: 8px;
-  object-fit: cover;
   margin-right: 20px;
 }
+
 
 .detail-content {
   width: 60%;
