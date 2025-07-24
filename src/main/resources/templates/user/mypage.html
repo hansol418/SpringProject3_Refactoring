@@ -20,35 +20,35 @@
     <div class="card p-4">
         <!-- 사용자 이름 표시 (Thymeleaf 사용) -->
         <div class="mb-3">
-            <p class="fw-bold">Username:</p>
+            <p class="fw-bold">이름:</p>
             <span id="username" th:text="${user.username}">사용자 이름</span>
         </div>
 
         <!-- 이메일 표시 및 수정 버튼 -->
         <div class="mb-3">
-            <p class="fw-bold">Email:</p>
+            <p class="fw-bold">이메일:</p>
             <span id="email" th:text="${user.email}">user@example.com</span>
-            <button class="btn btn-outline-primary btn-sm ms-2" onclick="editField('email')">Edit</button>
+            <button class="btn btn-outline-primary btn-sm ms-2" onclick="editField('email')">수정</button>
         </div>
 
         <!-- 주소 표시 및 수정 버튼 -->
         <div class="mb-3">
-            <p class="fw-bold">Address:</p>
+            <p class="fw-bold">주소:</p>
             <span id="address" th:text="${user.address}">123 Main St</span>
-            <button class="btn btn-outline-primary btn-sm ms-2" onclick="editField('address')">Edit</button>
+            <button class="btn btn-outline-primary btn-sm ms-2" onclick="editField('address')">수정</button>
         </div>
 
         <!-- 전화번호 표시 및 수정 버튼 -->
         <div class="mb-3">
-            <p class="fw-bold">Phone:</p>
+            <p class="fw-bold">전화번호:</p>
             <span id="phone" th:text="${user.phone}">010-1234-5678</span>
-            <button class="btn btn-outline-primary btn-sm ms-2" onclick="editField('phone')">Edit</button>
+            <button class="btn btn-outline-primary btn-sm ms-2" onclick="editField('phone')">수정</button>
         </div>
 
         <!-- 비밀번호 변경 및 계정 삭제 링크 -->
         <div class="mt-4 d-flex justify-content-between">
-            <a href="/users/mypage/changePassword" class="btn btn-warning">Change Password</a>
-            <a href="/users/mypage/deleteAccount" class="btn btn-danger">Delete Account</a>
+            <a href="/users/mypage/changePassword" class="btn btn-warning">비밀번호 변경</a>
+            <a href="/users/mypage/deleteAccount" class="btn btn-danger">계정삭제</a>
         </div>
     </div>
 
@@ -58,13 +58,13 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title">알림</h5>
-                    <button type="button" class="btn-close" onclick="closeModal()">Close</button>
+                    <button type="button" class="btn-close" onclick="closeModal()">닫기</button>
                 </div>
                 <div class="modal-body">
                     수정되었습니다.
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" onclick="closeModal()">Close</button>
+                    <button type="button" class="btn btn-secondary" onclick="closeModal()">닫기</button>
                 </div>
             </div>
         </div>
