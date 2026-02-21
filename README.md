@@ -160,6 +160,14 @@ Spring Boot의 `ImageClassifyController`에서 Django API를 호출합니다.
 
 ---
 
+## ☁️ AWS 배포 (Deployment)
+
+ToolWithMe는 AWS 환경에 배포하여 운영했습니다.
+
+👉 [AWS 배포 링크](http://52.79.99.241:8080/users/login)
+
+---
+
 ## 👤 담당 역할 (My Contribution)
 
 | 기능 | 기여도 |
